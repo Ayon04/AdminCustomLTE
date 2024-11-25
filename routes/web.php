@@ -1,26 +1,44 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('auth.Layouts.AuthLayout');
+    return view('auth.Pages.home-page');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/login-panel', function () {
+    return view('auth.Pages.login');
+});
+
+Route::get('/register-panel', function () {
+    return view('auth.Pages.register');
+});
+
+Route::get('/forgot-password-panel', function () {
+    return view('auth.Pages.forgot-password');
+});
+
+Route::get('/contact', function () {
+    return view('auth.Pages.contact-us');
+});
+
+
+Route::get('/about', function () {
+    return view('auth.Pages.about-us');
+});
+
+
+Route::get('/user-dashboard', function () {
+    return view('auth.Pages.dashboard');
+});
+
+
+Route::fallback(function () {
+         
+
+    return view('auth.Pages.not-found-404');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
