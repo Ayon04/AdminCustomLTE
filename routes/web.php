@@ -1,5 +1,7 @@
 <?php
-use App\Http\Controllers\ProfileController;
+
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,6 +15,11 @@ Route::get('/login-panel', function () {
 Route::get('/register-panel', function () {
     return view('auth.Pages.register');
 });
+
+
+Route::post('/register-admin', [UserController::class, 'store'])->name('signup');
+
+
 
 Route::get('/forgot-password-panel', function () {
     return view('auth.Pages.forgot-password');
@@ -32,13 +39,16 @@ Route::get('/user-dashboard', function () {
     return view('auth.Pages.dashboard');
 });
 
+// Route::get('/user-list', function () {
+//     return view('auth.Pages.user-list');
+// });
 
+Route::get('/list', [UserController::class, 'ViewStudent']);
 Route::fallback(function () {
          
 
     return view('auth.Pages.not-found-404');
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
