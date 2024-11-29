@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class UserStoreRequest extends FormRequest {
 
-    
+
     public function authorize(): bool {
         return true;
     }
@@ -21,36 +21,31 @@ class UserStoreRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'fullname'     => 'required | string  | min:3   |regex:/^[\pL\s]+$/u  | max: 30 ',
-            'email'         => 'required | email   ' ,
-            'mobile'        => 'required | regex:/(01)[0-9]{9}/ ',
-            'password'      => 'required|confirmed | alpha_num | min:4 | max:10 ',
+            'fullname'     => 'required|string|min:3|regex:/^[\pL\s]+$/u|max:30',
+            'email'        => 'required|email|unique:users,email',
+            'mobile'       => 'required|digits:11|regex:/^01[0-9]{9}$/|unique:users,mobile',
+            'password'     => 'required|confirmed|alpha_num|min:4|max:10',
             'password_confirmation' => 'required'
         ];
-        
     }
 
-  
-        public function messages(){
+    public function messages(){
         return [
-            
-            'fullname.required'      =>'Name is Required',
-            'fullname.alpha'         =>'Name must be alphabetic',
-            'fullname.max'           =>'Name can not be more then 30 charecters',
-           'mobile.required'         =>'mobile number is required',
-            'mobile.digits'          =>'mobile no must be 11 digits',
-            'mobile.regex'           =>'mobile no must start with 01',
-            'mobile.numeric'         =>'mobile no must be numeric',
-            'mobile.length'          =>'mobile no must be 11 digits',
+            'fullname.required'      => 'Name is required',
+            'fullname.alpha'         => 'Name must be alphabetic',
+            'fullname.max'           => 'Name cannot be more than 30 characters',
+            'mobile.required'        => 'Mobile number is required',
+            'mobile.digits'          => 'Mobile number must be exactly 11 digits',
+            'mobile.regex'           => 'Mobile number must start with 01 and contain exactly 11 digits',
+            'mobile.unique'          => 'Mobile number already exists',
             'email.required'         => 'Email is required!',
-            'email.email'            => 'Email is not correct format',
+            'email.email'            => 'Email format is incorrect',
+            'email.unique'           => 'Email already exists',
             'password.required'      => 'Password is required!',
-            'password.max'           =>'password can not be more than 10 charecters',
-            'password.min'           =>'password must be atleast 4 charecters', 
-            'password.alpha_num'     =>'password must be combination of alphabets and numbers',
-            'password_confirmation.required'=>'Retype is Required'  
-            
-                                                    
+            'password.max'           => 'Password cannot be more than 10 characters',
+            'password.min'           => 'Password must be at least 4 characters',
+            'password.alpha_num'     => 'Password must be a combination of alphabets and numbers',
+            'password_confirmation.required' => 'Retyped password is required',
         ];
     }
 
@@ -64,7 +59,7 @@ class UserStoreRequest extends FormRequest {
         return [
             'email' => 'trim|lowercase',
             'name'  => 'trim|capitalize|escape'
-            
+
         ];
     }
 

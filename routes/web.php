@@ -18,8 +18,13 @@ Route::get('/register-panel', function () {
 
 
 Route::post('/register-admin', [UserController::class, 'store'])->name('signup');
+Route::get('/confirm-delete/{id}', [UserController::class, 'destroyUser'])->name('confirm-delete');
 
+//Route::get('confirm-delete/', function () {
+//    return view('auth.Pages.delete-confirmation');
+//});
 
+Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('delete');
 
 Route::get('/forgot-password-panel', function () {
     return view('auth.Pages.forgot-password');
@@ -43,9 +48,9 @@ Route::get('/user-dashboard', function () {
 //     return view('auth.Pages.user-list');
 // });
 
-Route::get('/list', [UserController::class, 'ViewStudent']);
+Route::get('/list', [UserController::class, 'ViewUser'])->name('list');
 Route::fallback(function () {
-         
+
 
     return view('auth.Pages.not-found-404');
 });

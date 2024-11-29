@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | User List</title>
+  <title>AdminLTE  | User List</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
   <link rel="stylesheet" href="Admin/plugins/fontawesome-free/css/all.min.css">
   <!-- IonIcons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -36,19 +35,32 @@
                 <td>{{$users->fullname}}</td>
                 <td>{{$users->mobile}}</td>
                 <td>{{$users->email}}</td>
-                
-               
-                <td><button class="btn btn-dark"> <a href ={{ url("student-edit/". $users->id)}} >update</a></button></td> 
-                {{-- add button further  --}}
-                <td><button class="btn btn-danger"> <a href ={{"delete/".$users['id']}}>Delete</a></button></td></td>
+
+
+                <td>
+
+                    <form method="get" action="{{ route('confirm-delete', $users->id) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+                <td>
+
+                    <a href="{{ url('/edit/' . $users->id) }}" class="btn btn-warning">Edit</a>
+                </td>
+
+
+{{--                <td><button class="btn btn-dark"> <a href ={{ url("student-edit/". $users->id)}} >update</a></button></td>--}}
+{{--                --}}{{-- add button further  --}}
+{{--                <td><button class="btn btn-danger"> <a href ={{"delete/".$users['id']}}>Delete</a></button></td></td>--}}
               </tr>
-                
+
             @endforeach
         </tbody>
-      </table>        
+      </table>
     </section>
   </aside>
- 
+
 @include('auth.Layouts.InternalFooter');
 </div>
 <script src="Admin/plugins/jquery/jquery.min.js"></script>

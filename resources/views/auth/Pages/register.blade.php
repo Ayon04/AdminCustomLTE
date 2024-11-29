@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Registration Page (v2)</title>
+    <title>AdminLTE  | Admin Registration Page </title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -33,13 +33,13 @@
                 <form action="{{route('signup')}}" enctype="multipart/form-data" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="fullname" placeholder="Full name">
+                        <input type="text" class="form-control" value="{{ old('fullname') }}" name="fullname" placeholder="Full name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                       
+
                     </div>
 
                     @error('fullname')
@@ -47,46 +47,46 @@
                     @enderror
 
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email">
+                        <input type="email" class="form-control" value="{{old('email')}}" name="email" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
-                       
+
                     </div>
                     @error('email')
                     <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="mobile" placeholder="Mobile">
+                        <input type="text" class="form-control" value="{{old('mobile')}}" name="mobile" placeholder="Mobile">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-phone"></span>
                             </div>
                         </div>
-                       
+
                     </div>
                     @error('mobile')
                     <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
 
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control"  value="{{old('password')}}" name="password" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                       
+
                     </div>
                     @error('password')
                     <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
 
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password_confirmation" placeholder="Retype password">
+                        <input type="password" class="form-control" value="{{old('password_confirmation')}}" name="password_confirmation" placeholder="Retype password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
