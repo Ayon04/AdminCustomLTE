@@ -26,6 +26,10 @@ Route::get('/confirm-delete/{id}', [UserController::class, 'destroyUser'])->name
 
 Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('delete');
 
+Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+Route::post('/update/{id}', [UserController::class, 'update'])->name('update');
+
+
 Route::get('/forgot-password-panel', function () {
     return view('auth.Pages.forgot-password');
 });
@@ -50,7 +54,6 @@ Route::get('/user-dashboard', function () {
 
 Route::get('/list', [UserController::class, 'ViewUser'])->name('list');
 Route::fallback(function () {
-
 
     return view('auth.Pages.not-found-404');
 });

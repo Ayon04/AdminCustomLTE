@@ -8,6 +8,7 @@ use App\Http\Requests\UserStoreRequest;
 use Illuminate\Support\Facades\DB;
 //use \resources\views\auth\Layouts;
 //use \resources\views;
+use App\Http\Requests\UserUpdateRequest;
 
 
 class UserController extends Controller
@@ -42,9 +43,15 @@ class UserController extends Controller
     public function destroyUser($id)
     {
 
-        $user = User::findOrFail($id);
+        try {
+            $user = User::findOrFail($id);
 
-        return view('auth.Pages.delete-confirmation',compact('user'));
+            return view('auth.Pages.delete-confirmation',compact('user'));
+        }catch (\Throwable $e){
+
+
+            return redirect()->back()->with('message_fail', "an error occur");
+        }
     }
 
 
@@ -64,6 +71,37 @@ class UserController extends Controller
 
         }
     }
+    public function edit($id)
+    {
+        try{
+            $user = User::findOrFail($id);
+            return view('auth.Pages.admin-update',compact('user'));
+
+        }
+        catch(\Throwable $ex){
+
+            return redirect()->back()->with('message_fail',"an error occur");
+
+        }
+    }
+    public function update(
+        UserUpdateRequest  $updateRequest,
+        UserService  $userService,$id
+    ){
+        try{
+            $student = $userService->update($id,$updateRequest->validated());
+
+            return redirect()->back()->with('updated',"Successful update Operation");
+
+        }
+        catch(\Throwable $e){
+            //dd($e->getMessage());
+            return redirect()->back()->with('update_fail',"Failed update Operation");
+        }
+
+    }
+
+
 
 }
 
