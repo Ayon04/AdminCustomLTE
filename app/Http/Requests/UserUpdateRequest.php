@@ -35,7 +35,7 @@ class UserUpdateRequest extends FormRequest {
                 'regex:/^01[0-9]{9}$/',
                 Rule::unique('users', 'mobile')->ignore($id), // Replace 'user' with your route parameter
             ],
-            'password' => 'required|confirmed|alpha_num|min:4|max:10',
+            'password' => 'required|alpha_num|min:4|max:10',
         ];
     }
 
